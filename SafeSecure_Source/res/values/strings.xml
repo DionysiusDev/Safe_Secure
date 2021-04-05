@@ -73,4 +73,5 @@
     <string name="enter_existing">Enter Existing</string>
     <string name="copy_password">Copy Password</string>
     <string name="you_haven_t_scanned_password_strength_in_30_days">You haven\'t scanned password strength in 30 days.</string>
+    <string name="backup">Backup</string>
 </resources>
