@@ -6,9 +6,13 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.Calendar;
 
 import static com.sss.safesecure.LoginActivity.keyClass;
@@ -98,13 +102,13 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     /**
      * Purpose: gets all data from password info table.
      */
-    public Cursor Retrieve() {
+    public Cursor Retrieve(String tableName) {
 
         //gets the readable database
         SQLiteDatabase database = this.getReadableDatabase();
 
         //SQL SELECT QUERY - selects all data from db table
-        String selectQuery = "SELECT * FROM PasswordInfo";
+        String selectQuery = "SELECT * FROM " + tableName;
 
         return database.rawQuery(selectQuery, null);
     }
@@ -195,6 +199,136 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         return database.rawQuery(query, null);
     }
 
+    //region decrypt and backup pw info data
+
+    /**
+     * Purpose: creates a back up table for storing decrypted data.
+     */
+    public void createBakTable(){
+
+        //gets the writable database
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        database.execSQL(DBContract.PwBakTable.CREATE_TABLE);
+
+        database.close();
+    }
+    /**
+     * Purpose: Drops the backup table.
+     */
+    public void dropBakTable(){
+
+        //gets the writable database
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DROP TABLE IF EXISTS " + DBContract.PwBakTable.TABLE_NAME);
+
+        String query = "SELECT name FROM sqlite_master WHERE type='table' AND name='PasswordInfoBak'";
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        cursor.close();
+        database.close();
+    }
+    /**
+     * Purpose: retrieves the encrypted pw data and, calls the create backup method.
+     */
+    public void getBackupData(){
+        Cursor cursor = Retrieve("PasswordInfo");
+
+        while(cursor.moveToNext()){
+            String one = decryptData(cursor.getString(1));
+            String two = decryptData(cursor.getString(2));
+            String three = decryptData(cursor.getString(3));
+            String four = decryptData(cursor.getString(4));
+
+            CreateBakData(one, two, three, four);
+        }
+        cursor.close();
+    }
+    /**
+     * Purpose: saves the decrypted password data and inserts new backup table row.
+     * @param Website (string website)
+     * @param Email (string Email)
+     * @param Additional (string Additional)
+     * @param Pw (string Password)
+     */
+    public void CreateBakData(String Website, String Email, String Additional, String Pw) {
+
+        //Access the writable database
+        SQLiteDatabase database = this.getWritableDatabase();
+        //Content values for the database
+        ContentValues values = new ContentValues();
+
+        //PUT values in the content values
+        values.put(DBContract.PwBakTable.COLUMN_NAME1, Website);
+        values.put(DBContract.PwBakTable.COLUMN_NAME2, Email);
+        values.put(DBContract.PwBakTable.COLUMN_NAME3, Additional);
+        values.put(DBContract.PwBakTable.COLUMN_NAME4, Pw);
+
+        //inserts a row into the database
+        long newRowId = database.insert(DBContract.PwBakTable.TABLE_NAME, null, values);
+
+        Log.d("Creating Backup", "Adding decrypted data");
+
+        database.close();
+    }
+    /**
+     * Purpose: checks if the table exists in the data base.
+     * @param tableName the name of the table to check for.
+     * @return true of false.
+     */
+    public boolean checkTableExists(String tableName) {
+
+        //gets the readable database
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'";
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor != null) {
+
+            //table exists if count is greater than zero
+            if (cursor.getCount() > 0) {
+                return true;
+            }
+            cursor.close();
+        }
+        //table does not exist
+        return false;
+    }
+    /**
+     * Purpose: exports the data base for the user to access and backup
+     */
+    public void exportDatabase() {
+        try {
+                String dbName = "PWManagerDB.db";
+                File currentDB = context.getDatabasePath(dbName);
+                String backupDBPath = context.getExternalFilesDir("PWManager").getPath() + "/PWManagerBak.db";
+                File backupDB = new File(backupDBPath);
+
+                if (currentDB.exists()) {
+                    Log.d("Export DB", "currentDB exists @ " + currentDB);
+
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+                } else{
+                    Log.d("Export DB", "currentDB does not exist @ " + currentDB);
+                }
+                if(backupDB.exists()) {
+                    Log.d("Export DB", "backupDB exists @ " + backupDBPath);
+                }else{
+                    Log.d("Export DB", "backupDB does not exists @ " + backupDBPath);
+                }
+        } catch (Exception e) {
+            Log.e("Error Backing Up", "Error");
+            e.printStackTrace();
+        }
+    }
+    //endregion
+
     /**
      * Purpose: returns boolean value based on whether the database exists at the file path.
      */
@@ -262,7 +396,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         //retrieves all data from the pw info table
-        Cursor cursor = Retrieve();
+        Cursor cursor = Retrieve("PasswordInfo");
 
         //while the cursor is moving to the next entry
         while (cursor.moveToNext()) {

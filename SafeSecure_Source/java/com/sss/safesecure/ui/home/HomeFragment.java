@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -70,6 +72,17 @@ public class HomeFragment extends Fragment {
         Row1_TextView1 = root.findViewById(R.id.row1_TextView1);
         Row2_TextView1 = root.findViewById(R.id.row2_TextView1);
         Row3_TextView1  = root.findViewById(R.id.row3_TextView1);
+
+        //gets the button from the fragment layout by id
+        Button btnBackup = root.findViewById(R.id.BtnBackup);
+        //adds on click event to button generate
+        btnBackup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                backupDB();
+            }
+        });
 
         //checks security reports to notify user
         checkReusedReportDate();
@@ -145,6 +158,29 @@ public class HomeFragment extends Fragment {
                 return isBackPressed;
             }
         });
+    }
+
+    /**
+     * Purpose: decrypts and backs up database to users documents.
+     */
+    private void backupDB(){
+
+        //creates new dbHelper - allows access to the SQLiteDBHelper methods
+        //reference to the SQLiteDBHelper class
+        SQLiteDBHelper DBHelper = new SQLiteDBHelper(getContext());
+
+        if(DBHelper.checkTableExists("PasswordInfoBak")){
+            Log.d("Drop Table", "Dropping Table");
+            DBHelper.dropBakTable();
+        }
+        if(!DBHelper.checkTableExists("PasswordInfoBak")){
+            Log.d("Create Table", "Creating Backup Table");
+            DBHelper.createBakTable();
+            Log.d("Get Backup Data", "Getting Backup Data");
+            DBHelper.getBackupData();
+
+            DBHelper.exportDatabase();
+        }
     }
 
     /**
