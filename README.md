@@ -40,7 +40,7 @@ This app will allow you to store website, email, additional account info and pas
 ![details](https://user-images.githubusercontent.com/53543712/112973613-e4846000-9194-11eb-8927-f00e744b6b51.PNG)
 
 10. Security Reports - this screen allows you to scan password for:
-- passowrds that have been re-used on other sites
+- passwords that have been re-used on other sites
 - passwords that have been in use for longer than 30 days
 - password strength  
   

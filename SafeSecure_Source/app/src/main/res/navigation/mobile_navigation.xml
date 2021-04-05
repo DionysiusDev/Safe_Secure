@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:tag="nav_home"
+        android:id="@+id/nav_home"
+        android:name="com.sss.safesecure.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_reports"
+            app:destination="@id/nav_reports" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_create"
+        android:name="com.sss.safesecure.ui.create.CreateFragment"
+        android:label="@string/create_new"
+        tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/nav_edit"
+        android:name="com.sss.safesecure.ui.existing.ExistingFragment"
+        android:label="@string/enter_existing"
+        tools:layout="@layout/fragment_exist" />
+
+    <fragment
+        android:id="@+id/nav_list"
+        android:name="com.sss.safesecure.ui.list.ListFragment"
+        android:label="@string/view_website_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_nav_list_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="com.sss.safesecure.ui.details.DetailsFragment"
+        android:label="Password Details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_nav_details_to_nav_list"
+            app:destination="@id/nav_list" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_reports"
+        android:name="com.sss.safesecure.ui.reports.ReportsFragment"
+        android:label="@string/security_reports"
+        tools:layout="@layout/fragment_reports" />
+
+    <fragment
+        android:id="@+id/nav_faqs"
+        android:name="com.sss.safesecure.ui.faqs.FaqsFragment"
+        android:label="Frequently Asked Questions"
+        tools:layout="@layout/fragment_faqs" />
+</navigation>

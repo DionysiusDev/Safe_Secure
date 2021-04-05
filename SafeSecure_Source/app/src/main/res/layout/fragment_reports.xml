@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reports.ReportsFragment">
+
+    <ListView
+        android:id="@+id/PWListView"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/list_of_security_issues"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051" >
+    </ListView>
+
+    <TableLayout
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/BtnReset"
+        app:layout_constraintTop_toBottomOf="@+id/PWListView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:shrinkColumns="2"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="65dp">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:width="250dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="125dp"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/veryWeakImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="#D50000"
+                    android:contentDescription="@string/very_weak_image"/>
+
+                <TextView
+                    android:id="@+id/veryWeakImageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/very_weak_text"
+                    android:text="@string/very_weak"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="#000000"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/veryWeakCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/very_weak_count_text"
+                android:text="@string/count"
+                android:textSize="15sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginLeft="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#000000"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <RelativeLayout
+                android:layout_width="125dp"
+                android:layout_height="25dp" >
+
+                <ImageView
+                    android:id="@+id/weakImage"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:background="#FF6D00"
+                    android:contentDescription="@string/weak_image"/>
+
+                <TextView
+                    android:id="@+id/weakImageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/weak_image_text"
+                    android:text="@string/weak"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="#000000"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/weakCountText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/weak_count_text"
+                android:text="@string/count"
+                android:textSize="15sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginLeft="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#000000"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <RelativeLayout
+                android:layout_width="125dp"
+                android:layout_height="25dp" >
+
+                <ImageView
+                    android:id="@+id/mediumImage"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:background="#FFD600"
+                    android:contentDescription="@string/medium_image">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/mediumImageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/medium_image_text"
+                    android:text="@string/medium"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="#000000"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mediumCountText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/medium_count_text"
+                android:text="@string/count"
+                android:textSize="15sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginLeft="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#000000" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <RelativeLayout
+                android:layout_width="125dp"
+                android:layout_height="25dp" >
+
+                <ImageView
+                    android:id="@+id/strongImage"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:background="#AEEA00"
+                    android:contentDescription="@string/strong_image">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/strongImageText"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/strong_image_text"
+                    android:text="@string/strong"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="#000000"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/strongCountText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/strong_count_text"
+                android:text="@string/count"
+                android:textSize="15sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginLeft="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#000000" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="125dp"
+                android:layout_height="25dp" >
+
+                <ImageView
+                    android:id="@+id/veryStrongImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#64DD17"
+                    android:contentDescription="@string/very_strong_image">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/veryStrongImageText"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:contentDescription="@string/very_strong_image_text"
+                    android:text="@string/very_strong"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="#000000"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/veryStrongCountText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/very_strong_count_text"
+                android:text="@string/count"
+                android:textSize="15sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginLeft="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#000000"/>
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/BtnReset"
+        android:theme="@style/Theme.AppCompat.Button_Theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:contentDescription="@string/reset_the_report_list"
+        android:text="@string/reset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PWListView"/>
+
+    <Button
+        android:id="@+id/BtnHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="@string/help_button"
+        android:text="@string/help"
+        android:theme="@style/Theme.AppCompat.Button_Theme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnReset" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
