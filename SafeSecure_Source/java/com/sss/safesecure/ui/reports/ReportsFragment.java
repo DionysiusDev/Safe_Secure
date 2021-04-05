@@ -399,7 +399,7 @@ public class ReportsFragment extends Fragment {
         DBHelper = new SQLiteDBHelper(getActivity());
 
         //calls the get all data method and query's the database
-        Cursor cursor = DBHelper.Retrieve();
+        Cursor cursor = DBHelper.Retrieve("PasswordInfo");
 
         //instantiates a new calender
         Calendar currentDate = Calendar.getInstance();
@@ -489,7 +489,7 @@ public class ReportsFragment extends Fragment {
         DBHelper = new SQLiteDBHelper(getActivity());
 
         //calls the get all data method and query's the database
-        Cursor cursor = DBHelper.Retrieve();
+        Cursor cursor = DBHelper.Retrieve("PasswordInfo");
 
         //instantiates a list to store passwords
         List<String> pwList = new ArrayList<>();

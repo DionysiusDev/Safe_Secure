@@ -181,7 +181,7 @@ public class ListFragment extends Fragment {
         clearListView();
 
         //cursor used to navigate entry data in table query
-        Cursor cursor = DBHelper.Retrieve();
+        Cursor cursor = DBHelper.Retrieve("PasswordInfo");
 
         //while the cursor is moving through entries
         while (cursor.moveToNext()) {
@@ -216,7 +216,7 @@ public class ListFragment extends Fragment {
         DBHelper = new SQLiteDBHelper(getActivity());
 
         //cursor used to navigate entry data in table query
-        Cursor cursor = DBHelper.Retrieve();
+        Cursor cursor = DBHelper.Retrieve("PasswordInfo");
 
         //instantiates a list store decrypted website data
         List<String> decryptedList = new ArrayList<>();
@@ -262,7 +262,7 @@ public class ListFragment extends Fragment {
         DBHelper = new SQLiteDBHelper(getActivity());
 
         //cursor used to navigate entry data in table query
-        Cursor cursor = DBHelper.Retrieve();
+        Cursor cursor = DBHelper.Retrieve("PasswordInfo");
 
         //instantiates a list store decrypted website data
         List<String> decryptedList = new ArrayList<>();

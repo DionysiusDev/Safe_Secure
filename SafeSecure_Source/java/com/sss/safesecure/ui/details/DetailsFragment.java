@@ -200,7 +200,7 @@ public class DetailsFragment extends Fragment {
         DBHelper = new SQLiteDBHelper(getActivity());
 
         //cursor used to navigate entry data in table query
-        Cursor cursor = DBHelper.Retrieve();
+        Cursor cursor = DBHelper.Retrieve("PasswordInfo");
 
         //while the cursor is moving through entries
         while (cursor.moveToNext()) {
@@ -218,7 +218,6 @@ public class DetailsFragment extends Fragment {
         }
         cursor.close();     //closes the cursor
         DBHelper.close();   //closes the database
-
     }
 
     /**
